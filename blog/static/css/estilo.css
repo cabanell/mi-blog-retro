@@ -1,0 +1,201 @@
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #f6f2e8;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+header, footer {
+    background-color: #fff;
+    border: 2px solid #222;
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+nav a {
+    margin: 0 1rem;
+    color: #222;
+    text-decoration: none;
+    border: 1px solid transparent;
+    padding: 2px 6px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    border-color: #222;
+    background-color: #eee;
+}
+
+/* Obsoleta: .post ya no se usa directamente, pero puedes mantenerla para cosas independientes */
+.post {
+    border: 2px solid #222;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: rgba(255, 192, 203, 0.8);
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 0px #000;
+}
+
+h1, h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+button {
+    background-color: #fff;
+    border: 2px solid #222;
+    padding: 0.5rem 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #eee;
+}
+
+/* Ventanas retro */
+.ventana {
+    border: 2px solid #222;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 4px 4px 0px #000;
+    margin: 2rem auto;
+    max-width: 800px;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ventana:hover {
+    transform: scale(1.01);
+    box-shadow: 6px 6px 0px #000;
+}
+
+.ventana-titulo {
+    background-color: #e0dfdc;
+    padding: 0.5rem 1rem;
+    border-bottom: 2px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.ventana-titulo span {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.ventana-contenido {
+    padding: 1rem;
+    background-color: rgba(255, 192, 203, 0.2);
+}
+
+/* Likes y dislikes (ajustado) */
+.likes {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.like-form, .dislike-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.like-btn, .dislike-btn {
+    font-size: 1.4rem; /* reducido desde 2rem */
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+.like-btn:hover,
+.dislike-btn:hover {
+    transform: scale(1.2);
+}
+
+.like-count,
+.dislike-count {
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+/* Comentarios como sub-ventana */
+.ventana-comentarios {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 2px dashed #bbb;
+}
+
+.comentarios-lista {
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 0.5rem;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.comentario-item {
+    margin-bottom: 0.5rem;
+    border-bottom: 1px dotted #999;
+    padding-bottom: 0.3rem;
+}
+
+.comentario-form textarea {
+    width: 100%;
+    resize: vertical;
+    border: 1px solid #aaa;
+    padding: 0.3rem;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+
+    .ventana {
+        margin: 1rem;
+        box-shadow: 2px 2px 0px #000;
+    }
+
+    .ventana-titulo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+
+    .likes {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .comentarios-lista {
+        max-height: 200px;
+    }
+
+    button, .like-btn, .dislike-btn {
+        font-size: 1rem;
+        padding: 0.3rem 0.7rem;
+    }
+
+    #sidebar-icons {
+        display: none; /* oculta barra lateral en móvil */
+    }
+}
+

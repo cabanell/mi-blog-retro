@@ -1,0 +1,66 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Feed{% endblock %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="ventana">
+            <div class="ventana-titulo">
+                {{ post.titulo }}
+                <span>{{ post.publicado_en|date:"d M Y H:i" }}</span>
+            </div>
+
+            <div class="ventana-contenido">
+                <div class="contenido">
+                    {{ post.contenido|safe }}
+                </div>
+
+                <div class="likes">
+                    <form method="post" action="{% url 'dar_like' post.id %}" class="like-form">
+                        {% csrf_token %}
+                        <button class="like-btn" type="submit">🐐</button>
+                        <span class="like-count">{{ post.likes }}</span>
+                    </form>
+                
+                    <form method="post" action="{% url 'dar_dislike' post.id %}" class="like-form">
+                        {% csrf_token %}
+                        <button class="dislike-btn" type="submit">👎</button>
+                        <span class="dislike-count">{{ post.dislikes }}</span>
+                    </form>
+                </div>
+                
+
+                <!-- Comentarios -->
+                <div class="ventana-comentarios">
+                    <strong>Comentarios:</strong>
+                    <div class="comentarios-lista">
+                        {% for comentario in post.comentarios.all %}
+                            <div class="comentario-item">
+                                <strong>{{ comentario.autor.username }}</strong>: {{ comentario.texto }}
+                            </div>
+                        {% empty %}
+                            <p>No hay comentarios.</p>
+                        {% endfor %}
+                    </div>
+
+                    {% if user.is_authenticated and user.perfilusuario.puede_comentar %}
+                        <form method="post" class="comentario-form">
+                            {% csrf_token %}
+                            {{ comentario_form.as_p }}
+                            <input type="hidden" name="post_id" value="{{ post.id }}">
+                            <button type="submit">Comentar</button>
+                        </form>
+                    {% elif user.is_authenticated %}
+                        <p><em>No tienes permiso para comentar.</em></p>
+                    {% else %}
+                        <p><em>Inicia sesión para comentar.</em></p>
+                    {% endif %}
+                </div>
+
+
+            </div>
+        </div>
+    {% empty %}
+        <p>No hay publicaciones aún.</p>
+    {% endfor %}
+{% endblock %}

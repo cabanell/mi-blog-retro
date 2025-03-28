@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block title %}Contacto{% endblock %}
+{% block content %}
+<div class="ventana">
+  <div class="ventana-titulo">Contacto</div>
+  <div class="ventana-contenido">
+    {% if enviado %}
+        <p style="color: green;">¡Gracias por tu mensaje! Te responderé pronto.</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

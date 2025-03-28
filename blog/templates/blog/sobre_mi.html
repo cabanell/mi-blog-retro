@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+{% block title %}Sobre mí{% endblock %}
+{% block content %}
+<div class="ventana">
+  <div class="ventana-titulo">Sobre mí</div>
+  <div class="ventana-contenido">
+    {% if perfil %}
+        {% if perfil.foto_perfil %}
+            <img src="{{ perfil.foto_perfil.url }}" alt="Foto de perfil"
+                 style="width: 200px; border-radius: 50%; margin-bottom: 1rem;">
+        {% endif %}
+        <p><strong>Nombre:</strong> {{ perfil.usuario.first_name }} {{ perfil.usuario.last_name }}</p>
+        <p><strong>Usuario:</strong> @{{ perfil.usuario.username }}</p>
+        <p><strong>Biografía:</strong></p>
+        <p>{{ perfil.biografia }}</p>
+    {% else %}
+        <p>No hay información de perfil disponible.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
