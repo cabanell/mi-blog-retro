@@ -92,3 +92,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+if not DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
+
