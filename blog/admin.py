@@ -12,5 +12,4 @@ admin.site.register(MensajeContacto)
 
 @admin.register(PerfilUsuario)
 class PerfilUsuarioAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'nombre')
-    fields = ('usuario', 'nombre', 'biografia', 'foto')
+    list_display = ('nombre', 'biografia')

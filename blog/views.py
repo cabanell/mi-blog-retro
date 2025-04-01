@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.views.decorators.http import require_POST
+from .models import PerfilUsuario
 
 from .models import (
     Post, Categoria, Etiqueta, Comentario, PerfilUsuario,
@@ -77,3 +78,8 @@ def contacto(request):
         'form': form,
         'enviado': enviado
     })
+
+
+def sobre_mi(request):
+    perfil = PerfilUsuario.objects.first()
+    return render(request, 'blog/sobre_mi.html', {'perfil': perfil})
