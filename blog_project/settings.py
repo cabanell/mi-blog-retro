@@ -9,9 +9,10 @@ DB_DIR = os.environ.get("RENDER_DISK_PATH", "/var/media")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(DB_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(os.environ.get("RENDER_DISK_PATH", "/var/media"), 'db.sqlite3'),
     }
 }
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-o*^_0#*nxxe!+6a!jaon4r#g2om2#2^ba&67=zui$dm#pb#g_s')
@@ -63,13 +64,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blog_project.wsgi.application'
 
-# Database (para Render puedes usar SQLite o cambiar a PostgreSQL después)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
