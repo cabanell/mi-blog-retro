@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comentario, MensajeContacto
+from .models import Comentario, MensajeContacto, Cancion
 
 class ComentarioForm(forms.ModelForm):
     class Meta:
@@ -21,4 +21,10 @@ class ContactoForm(forms.ModelForm):
         widgets = {
             'mensaje': forms.Textarea(attrs={'rows': 4}),
         }
+
+
+class CancionForm(forms.ModelForm):
+    class Meta:
+        model = Cancion
+        fields = ['titulo', 'descripcion', 'archivo']
 

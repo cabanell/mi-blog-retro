@@ -10,5 +10,7 @@ urlpatterns = [
     path('like/<int:post_id>/', views.dar_like, name='dar_like'),
     path('dislike/<int:post_id>/', views.dar_dislike, name='dar_dislike'),
     path('cabra/', vista_cabra, name='cabra'),
+    path('musica/', views.vista_musica, name='musica'),
+
 
 ]

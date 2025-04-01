@@ -90,5 +90,17 @@ class Cabra(models.Model):
 
     def __str__(self):
         return "Vista Cabra"
+    
+class Cancion(models.Model):
+    titulo = models.CharField(max_length=100)
+    descripcion = models.TextField(blank=True)
+    archivo = models.FileField(upload_to='musica/')
+    fecha_subida = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titulo
+
+
+
 
 

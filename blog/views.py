@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 from .models import PerfilUsuario
-from .models import Cabra
+from .models import Cabra, Cancion
 from django.http import HttpResponse
 
 from .models import (
@@ -93,4 +93,11 @@ def vista_cabra(request):
     if not cabra:
         return render(request, 'blog/cabra.html', {'cabra': cabra})
     return render(request, 'cabra.html', {'cabra': cabra})
+
+
+def vista_musica(request):
+    canciones = Cancion.objects.order_by('-publicado_en')
+    return render(request, 'blog/musica.html', {'canciones': canciones})
+
+
 
