@@ -91,7 +91,7 @@ def sobre_mi(request):
 def vista_cabra(request):
     cabra = Cabra.objects.first()
     if not cabra:
-        return render(request, 'cabra.html', {'cabra': None})  # o redirige a otra página
+        return render(request, 'blog/cabra.html', {'cabra': cabra})
     return render(request, 'cabra.html', {'cabra': cabra})
 
 def cabra(request):
@@ -99,6 +99,6 @@ def cabra(request):
         cabra = Cabra.objects.first()
         if not cabra:
             return HttpResponse("No hay ningún objeto Cabra creado aún.")
-        return render(request, 'cabra.html', {'cabra': cabra})
+        return render(request, 'blog/cabra.html', {'cabra': cabra})
     except Exception as e:
         return HttpResponse(f"Error en la vista cabra: {str(e)}")
