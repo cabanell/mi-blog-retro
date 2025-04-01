@@ -1,74 +1,169 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>{% block title %}Mi Blog{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+  <style>
+    :root {
+      --fondo: #fff;
+      --header: #fff;
+      --ventana: #f5f5f5;
+      --texto: #000;
+      --fuente: 'Courier New', monospace;
+    }
 
-    <meta charset="UTF-8">
-    <title>{% block title %}Mi Blog{% endblock %}</title>
-    {% load static %}
-<link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    body {
+      background-color: var(--fondo);
+      font-family: var(--fuente);
+      color: var(--texto);
+      margin: 0;
+    }
 
+    header, footer {
+      background-color: var(--header);
+      color: var(--texto);
+    }
+
+    .ventana, .ventana-contenido, .ventana-titulo {
+      background-color: var(--ventana);
+      color: var(--texto);
+    }
+
+    button {
+      font-family: var(--fuente);
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--texto);
+      background: #fff;
+      cursor: pointer;
+    }
+
+    nav a {
+      display: inline-block;
+      margin: 0.3rem 0.5rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-toggle:active {
+      transform: rotate(90deg);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1rem;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .nav-links.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      header h1 {
+        font-size: 1.4rem;
+        text-align: center;
+      }
+
+      button {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Encabezado fijo -->
-    <header style="position: fixed; top: 0; width: 100%; background: white; padding: 1rem; border-bottom: 1px solid #ccc; z-index: 1000;">
-        <h1 style="margin: 0; font-size: 2rem;">CABRA BLOG</h1>
-        <nav style="margin-top: 0.5rem;">
-            <a href="{% url 'feed' %}">Feed</a> |
-            <a href="{% url 'sobre_mi' %}">Sobre mí</a> |
-            <a href="{% url 'galeria' %}">Galería</a> |
-            <a href="{% url 'contacto' %}">Contacto</a>
-        </nav>
-    </header>
+<header style="position: fixed; top: 0; width: 100%; padding: 1rem; border-bottom: 1px solid #ccc; z-index: 1000;">
+  <h1 style="margin: 0; font-size: 2rem;">CABRA BLOG</h1>
+  <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</button>
+  <nav class="nav-links">
+    <a href="{% url 'feed' %}">Feed</a>
+    <a href="{% url 'sobre_mi' %}">Sobre mí</a>
+    <a href="{% url 'galeria' %}">Galería</a>
+    <a href="{% url 'contacto' %}">Contacto</a>
+  </nav>
+</header>
 
-    <!-- Contenido dinámico -->
-    <main style="padding-top: 150px; padding-bottom: 80px;">
-        {% block content %}{% endblock %}
-    </main>
+<main style="padding-top: 150px; padding-bottom: 80px; max-width: 100%;">
+  {% block content %}{% endblock %}
+</main>
 
-    <!-- Pie de página fijo -->
-    <footer style="position: fixed; bottom: 0; width: 100%; background: white; padding: 0.5rem; border-top: 1px solid #ccc; text-align: center;">
-        <small>© 2025 CABRA byCabanel. Todos los derechos reservados.</small>
-    </footer>
+<footer style="position: fixed; bottom: 0; width: 100%; padding: 0.5rem; border-top: 1px solid #ccc; text-align: center;">
+  <small>© 2025 CABRA byCabanel. Todos los derechos reservados.</small>
+</footer>
 
-    <div style="position: fixed; bottom: 1rem; right: 1rem; z-index: 9999;">
-        <button onclick="cambiarFondoAleatorio()">🖼 Fondo</button>
-      </div>
-      
-      <script>
-        const fondos = [
-          "fondos/f1.jpg",
-          "fondos/f2.jpg",
-          "fondos/f3.jpg",
-          "fondos/f4.jpg",
-          "fondos/f5.jpg",
-          "fondos/f6.jpg",
-          "fondos/f7.jpg"
-        ];
-      
-        function cambiarFondoAleatorio() {
-          const elegido = fondos[Math.floor(Math.random() * fondos.length)];
-          aplicarFondo(elegido);
-          localStorage.setItem("fondo_seleccionado", elegido);
-        }
-      
-        function aplicarFondo(fondo) {
-          const ruta = `/static/img/${fondo}`;
-          document.body.style.backgroundImage = `url(${ruta})`;
-          document.body.style.backgroundRepeat = "repeat";
-          document.body.style.backgroundSize = "auto";
-          document.body.style.backgroundAttachment = "fixed";
-        }
-      
-        // Cargar fondo guardado
-        const fondoGuardado = localStorage.getItem("fondo_seleccionado");
-        if (fondoGuardado) {
-          aplicarFondo(fondoGuardado);
-        }
-      </script>
-      
-      
+<div style="position: fixed; bottom: 1rem; right: 1rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.5rem;">
+  <button onclick="cambiarTemaRetro()">🎨 Random Retro</button>
+</div>
+
+<script>
+  const retroThemes = [
+    {
+      fondo: '#FFC567', header: '#552CB7', ventana: '#FB7DA8', texto: '#000', fuente: 'Courier New, monospace'
+    },
+    {
+      fondo: '#FD5A46', header: '#058CD7', ventana: '#00995E', texto: '#fff', fuente: 'Lucida Console, monospace'
+    },
+    {
+      fondo: '#FB7DA8', header: '#FFC567', ventana: '#552CB7', texto: '#000', fuente: 'Consolas, monospace'
+    },
+    {
+      fondo: '#058CD7', header: '#00995E', ventana: '#FD5A46', texto: '#fff', fuente: 'VT323, monospace'
+    }
+  ];
+
+  function cambiarTemaRetro() {
+    const tema = retroThemes[Math.floor(Math.random() * retroThemes.length)];
+    document.documentElement.style.setProperty('--fondo', tema.fondo);
+    document.documentElement.style.setProperty('--header', tema.header);
+    document.documentElement.style.setProperty('--ventana', tema.ventana);
+    document.documentElement.style.setProperty('--texto', tema.texto);
+    document.documentElement.style.setProperty('--fuente', tema.fuente);
+    localStorage.setItem('temaRetro', JSON.stringify(tema));
+  }
+
+  const guardado = localStorage.getItem('temaRetro');
+  if (guardado) {
+    const tema = JSON.parse(guardado);
+    document.documentElement.style.setProperty('--fondo', tema.fondo);
+    document.documentElement.style.setProperty('--header', tema.header);
+    document.documentElement.style.setProperty('--ventana', tema.ventana);
+    document.documentElement.style.setProperty('--texto', tema.texto);
+    document.documentElement.style.setProperty('--fuente', tema.fuente);
+  }
+</script>
 
 </body>
 </html>

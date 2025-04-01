@@ -199,3 +199,12 @@ button:hover {
     }
 }
 
+const retroColors = [
+  '#FFC567', // Amarillo retro
+  '#FB7DA8', // Rosa pastel
+  '#FD5A46', // Naranja fuerte
+  '#552CB7', // Morado intenso
+  '#00995E', // Verde
+  '#058CD7'  // Azul vibrante
+];
+
