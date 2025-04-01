@@ -2,17 +2,21 @@ import os
 from pathlib import Path
 
 # Build paths inside the project
-BASE_DIR = Path(__file__).resolve().parent.parent
 
-RENDER_DISK_PATH = os.environ.get("RENDER_DISK_PATH", "/var/media")
+BASE_DIR = Path(__file__).resolve().parent.parent
+RENDER_DISK_PATH = os.environ.get("RENDER_DISK_PATH")
+
+if RENDER_DISK_PATH:
+    DB_PATH = os.path.join(RENDER_DISK_PATH, 'db.sqlite3')
+else:
+    DB_PATH = os.path.join(BASE_DIR, 'db.sqlite3')
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(RENDER_DISK_PATH, 'db.sqlite3'),
+        'NAME': DB_PATH,
     }
 }
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-o*^_0#*nxxe!+6a!jaon4r#g2om2#2^ba&67=zui$dm#pb#g_s')
 
