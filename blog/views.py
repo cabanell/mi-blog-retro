@@ -94,11 +94,3 @@ def vista_cabra(request):
         return render(request, 'blog/cabra.html', {'cabra': cabra})
     return render(request, 'cabra.html', {'cabra': cabra})
 
-def cabra(request):
-    try:
-        cabra = Cabra.objects.first()
-        if not cabra:
-            return HttpResponse("No hay ningún objeto Cabra creado aún.")
-        return render(request, 'blog/cabra.html', {'cabra': cabra})
-    except Exception as e:
-        return HttpResponse(f"Error en la vista cabra: {str(e)}")
