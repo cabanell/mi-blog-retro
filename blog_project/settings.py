@@ -85,7 +85,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files (uploads)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(RENDER_DISK_PATH)
+MEDIA_ROOT = os.path.join(os.environ.get("RENDER_DISK_PATH", "/var/media"))
 
 
 
