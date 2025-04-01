@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 DB_DIR = os.environ.get("RENDER_DISK_PATH", "/var/media")
 
 DATABASES = {
