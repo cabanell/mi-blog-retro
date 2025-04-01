@@ -48,7 +48,7 @@ class Comentario(models.Model):
 # Extensión del modelo de usuario para agregar perfil y autorización personalizada
 class PerfilUsuario(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=100, blank=True)
+    nombre = models.CharField(max_length=100, blank=True, null=True)
     biografia = models.TextField(blank=True)
     foto_perfil = models.ImageField(upload_to='perfiles/', blank=True, null=True)
     puede_publicar = models.BooleanField(default=False)  # Controla si puede escribir posts

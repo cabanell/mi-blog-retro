@@ -11,7 +11,10 @@
         {% endif %}
         {% if perfil.nombre %}
           <p><strong>Nombre:</strong> {{ perfil.nombre }}</p>
+        {% else %}
+          <p><strong>Nombre:</strong> Sin definir</p>
         {% endif %}
+
 
         <p><strong>Biografía:</strong></p>
         <p>{{ perfil.biografia }}</p>
