@@ -5,7 +5,7 @@ from .models import PerfilUsuario
 from .models import Cabra
 
 from .models import (
-    Post, Categoria, Etiqueta, Comentario, PerfilUsuario,
+    Post, Categoria, Etiqueta, Comentario,
     ConfiguracionBlog, ImagenGaleria
 )
 
@@ -89,4 +89,6 @@ def sobre_mi(request):
 
 def vista_cabra(request):
     cabra = Cabra.objects.first()
+    if not cabra:
+        return render(request, 'cabra.html', {'cabra': None})  # o redirige a otra página
     return render(request, 'cabra.html', {'cabra': cabra})

@@ -4,21 +4,25 @@
 {% block title %}Cabra{% endblock %}
 
 {% block content %}
-<div class="ventana" style="max-width: 600px; margin: auto; padding: 2rem; position: relative;">
-  {% if cabra.foto_perfil %}
-    <img src="{{ cabra.foto_perfil.url }}" alt="Foto de perfil" style="max-width: 100%; border-radius: 50%;">
-  {% endif %}
-  <h2>Biografía</h2>
-  <p>{{ cabra.biografia }}</p>
-  <div style="margin-top: 1rem;">
-    {% if cabra.instagram %}
-      <a href="{{ cabra.instagram }}" target="_blank">Instagram</a><br>
+{% if cabra %}
+  <div class="ventana" style="max-width: 600px; margin: auto; padding: 2rem; position: relative;">
+    {% if cabra.foto_perfil %}
+      <img src="{{ cabra.foto_perfil.url }}" alt="Foto de perfil" style="max-width: 100%; border-radius: 50%;">
     {% endif %}
-    {% if cabra.youtube %}
-      <a href="{{ cabra.youtube }}" target="_blank">YouTube</a>
-    {% endif %}
+    <h2>Biografía</h2>
+    <p>{{ cabra.biografia }}</p>
+    <div style="margin-top: 1rem;">
+      {% if cabra.instagram %}
+        <a href="{{ cabra.instagram }}" target="_blank">Instagram</a><br>
+      {% endif %}
+      {% if cabra.youtube %}
+        <a href="{{ cabra.youtube }}" target="_blank">YouTube</a>
+      {% endif %}
+    </div>
   </div>
-</div>
+{% else %}
+  <p style="text-align: center; padding: 2rem;">Aún no hay información disponible.</p>
+{% endif %}
 
 <script>
   const emojis = ['🐐', '🐐', '🐐', '🐐'];
