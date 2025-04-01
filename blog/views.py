@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.views.decorators.http import require_POST
 from .models import PerfilUsuario
 from .models import Cabra
+from django.http import HttpResponse
 
 from .models import (
     Post, Categoria, Etiqueta, Comentario,
@@ -92,3 +93,12 @@ def vista_cabra(request):
     if not cabra:
         return render(request, 'cabra.html', {'cabra': None})  # o redirige a otra página
     return render(request, 'cabra.html', {'cabra': cabra})
+
+def cabra(request):
+    try:
+        cabra = Cabra.objects.first()
+        if not cabra:
+            return HttpResponse("No hay ningún objeto Cabra creado aún.")
+        return render(request, 'cabra.html', {'cabra': cabra})
+    except Exception as e:
+        return HttpResponse(f"Error en la vista cabra: {str(e)}")
