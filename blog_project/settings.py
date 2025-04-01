@@ -17,7 +17,7 @@ DATABASES = {
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-o*^_0#*nxxe!+6a!jaon4r#g2om2#2^ba&67=zui$dm#pb#g_s')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.onrender.com']  # Render usará esto
 
