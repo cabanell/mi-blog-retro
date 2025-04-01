@@ -96,6 +96,7 @@ class Cancion(models.Model):
     descripcion = models.TextField(blank=True)
     archivo = models.FileField(upload_to='musica/')
     fecha_subida = models.DateTimeField(auto_now_add=True)
+    publicado_en = models.DateTimeField(default=timezone.now)  # Nuevo campo
 
     def __str__(self):
         return self.titulo
