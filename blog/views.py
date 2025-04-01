@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 from .models import PerfilUsuario
+from .models import Cabra
 
 from .models import (
     Post, Categoria, Etiqueta, Comentario, PerfilUsuario,
@@ -83,3 +84,9 @@ def contacto(request):
 def sobre_mi(request):
     perfil = PerfilUsuario.objects.first()
     return render(request, 'blog/sobre_mi.html', {'perfil': perfil})
+
+
+
+def vista_cabra(request):
+    cabra = Cabra.objects.first()
+    return render(request, 'cabra.html', {'cabra': cabra})

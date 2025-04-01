@@ -81,4 +81,14 @@ class MensajeContacto(models.Model):
 
     def __str__(self):
         return f"Mensaje de {self.nombre} ({self.correo})"
+    
+class Cabra(models.Model):
+    foto_perfil = models.ImageField(upload_to='cabra/')
+    biografia = models.TextField()
+    instagram = models.URLField(blank=True, null=True)
+    youtube = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return "Vista Cabra"
+
 

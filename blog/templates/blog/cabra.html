@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cabra{% endblock %}
+
+{% block content %}
+<div class="ventana" style="max-width: 600px; margin: auto; padding: 2rem; position: relative;">
+  {% if cabra.foto_perfil %}
+    <img src="{{ cabra.foto_perfil.url }}" alt="Foto de perfil" style="max-width: 100%; border-radius: 50%;">
+  {% endif %}
+  <h2>Biografía</h2>
+  <p>{{ cabra.biografia }}</p>
+  <div style="margin-top: 1rem;">
+    {% if cabra.instagram %}
+      <a href="{{ cabra.instagram }}" target="_blank">Instagram</a><br>
+    {% endif %}
+    {% if cabra.youtube %}
+      <a href="{{ cabra.youtube }}" target="_blank">YouTube</a>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  const emojis = ['🐐', '🐐', '🐐', '🐐'];
+  emojis.forEach(() => {
+    const el = document.createElement('div');
+    el.textContent = '🐐';
+    el.style.position = 'fixed';
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.top = '-50px';
+    el.style.fontSize = '2rem';
+    el.style.animation = `rebotar ${2 + Math.random() * 2}s linear infinite`;
+    document.body.appendChild(el);
+  });
+</script>
+
+<style>
+@keyframes rebotar {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(100vh); opacity: 0.5; }
+  100% { transform: translateY(-50px); opacity: 0; }
+}
+</style>
+{% endblock %}
