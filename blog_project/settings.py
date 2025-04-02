@@ -1,31 +1,24 @@
 import os
 from pathlib import Path
 
-# Build paths inside the project
-
+# Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
-RENDER_DISK_PATH = os.environ.get("RENDER_DISK_PATH")
 
-if RENDER_DISK_PATH:
-    DB_PATH = os.path.join(RENDER_DISK_PATH, 'db.sqlite3')
-else:
-    DB_PATH = os.path.join(BASE_DIR, 'db.sqlite3')
-
+# Base de datos SQLite
+DB_PATH = os.path.join(BASE_DIR, 'db.sqlite3')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': DB_PATH,
     }
 }
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-o*^_0#*nxxe!+6a!jaon4r#g2om2#2^ba&67=zui$dm#pb#g_s')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Seguridad
+SECRET_KEY = os.environ.get('SECRET_KEY', 'clave-secreta-insegura')  # NO la uses en producción
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
-ALLOWED_HOSTS = ['.onrender.com']  # Render usará esto
-
-# Application definition
+# Aplicaciones
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,7 +31,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # nuevo para servir archivos estáticos en producción
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # para servir estáticos en prod
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -67,8 +60,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blog_project.wsgi.application'
 
-
-# Password validation
+# Passwords
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -76,29 +68,23 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
+# Internacionalización
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JS, images)
+# Archivos estáticos
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'blog/static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Media files (uploads)
+# Archivos media
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.environ.get("RENDER_DISK_PATH", "/var/media"))
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-
-
-# Default primary key field type
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+# Archivos estáticos en producción con whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-if not DEBUG:
-    from django.conf.urls.static import static
-
+# Llave primaria por defecto
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
